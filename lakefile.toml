@@ -1,0 +1,22 @@
+name = "CircNet"
+version = "0.1.0"
+keywords = ["math", "integrated-information-theory", "formal-verification"]
+defaultTargets = ["CircNet"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+# The core formalization of IIT 4.0: definitions of repertoires, phi_d, relations,
+# Phi, system partitions, phi_s and the exclusion postulate.  Everything in this
+# repository is built on top of it and nothing in it is duplicated here.
+[[require]]
+name = "IIT"
+git = "https://github.com/rndmx/Integ"
+rev = "v1"
+
+[[lean_lib]]
+name = "CircNet"
