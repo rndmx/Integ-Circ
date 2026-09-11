@@ -33,22 +33,6 @@ lake update      # fetches Integ v1 and Mathlib
 lake build
 ```
 
-Lean modules are `CircNet.*`; the Lean *namespace* is `IIT`, so theorem names read
-`IIT.isComplex_circNet_univ`. Every theorem here is checked by the Lean kernel and
-depends on no axioms beyond the three of the ambient logic (`propext`,
-`Classical.choice`, `Quot.sound`), with no use of `native_decide` and no appeal to
-numerical evaluation the kernel does not itself perform. To re-check the axiom
-dependencies:
-
-```lean
-import CircNet
-#print axioms IIT.isComplex_circNet_univ
-#print axioms IIT.two_pow_sq_le_PhiMax_circNet
-#print axioms IIT.isDistinctionMech_circNet_iff
-#print axioms IIT.card_distinctionMechs_circNet
-```
-
-
 ## Layout
 
 * `CircNet/Common.lean` — the handful of substrate-independent definitions and lemmas
