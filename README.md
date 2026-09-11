@@ -11,22 +11,6 @@ exactly when an odd number of the three are on. Write `R_N` for this ring.
 The main theorem, the lower bound on `Φ`, is `IIT.two_pow_sq_le_PhiMax_circNet` in
 `CircNet/CircFamily.lean`.
 
-## The theorems
-
-For every `N ≥ 8` with `3 ∤ N`:
-
-| | Lean name | file |
-|---|---|---|
-| `R_N` is a **complex** — it strictly exceeds every nonempty proper subsystem in system integrated information, **in every state and against every background** | `IIT.isComplex_circNet_univ` | `CircNet/CirculantD3Final.lean` |
-| its **integrated information** at the all-ones state is at least `2 ^ (N ^ 2 / 8) * (1/2) ^ N / (2 * N) - 1` | `IIT.two_pow_sq_le_PhiMax_circNet` | `CircNet/CircFamily.lean` |
-| the **distinctions** of `R_N` at the all-ones state are exactly its arcs of length at least three, including the whole cycle — `N * (N - 3) + 1` of them | `IIT.isDistinctionMech_circNet_iff`, `IIT.card_distinctionMechs_circNet` | `CircNet/CircOnlyArcs.lean` |
-
-All are checked by the Lean kernel and depend on no axioms beyond the three of the
-ambient logic (`propext`, `Classical.choice`, `Quot.sound`). The development contains no
-use of `native_decide`, and no appeal to numerical evaluation that the kernel does not
-itself perform. All are checked in a single import closure, so they are established
-of the same object.
-
 ## Relation to the core formalization
 
 This repository contains **no** formalization of IIT 4.0 itself. The definitions —
@@ -50,7 +34,11 @@ lake build
 ```
 
 Lean modules are `CircNet.*`; the Lean *namespace* is `IIT`, so theorem names read
-`IIT.isComplex_circNet_univ`. To re-check the axiom dependencies:
+`IIT.isComplex_circNet_univ`. Every theorem here is checked by the Lean kernel and
+depends on no axioms beyond the three of the ambient logic (`propext`,
+`Classical.choice`, `Quot.sound`), with no use of `native_decide` and no appeal to
+numerical evaluation the kernel does not itself perform. To re-check the axiom
+dependencies:
 
 ```lean
 import CircNet
@@ -60,9 +48,6 @@ import CircNet
 #print axioms IIT.card_distinctionMechs_circNet
 ```
 
-On a machine with limited memory, build with `LEAN_NUM_THREADS=1`; several parallel
-`lean` processes each map the whole of Mathlib and can exhaust the commit charge,
-which surfaces as spurious `failed to read file '....olean'` errors.
 
 ## Layout
 
