@@ -5,11 +5,12 @@ Authors: Arnaud Mayeux
 -/
 import CircNet.CirculantD3Final
 import CircNet.CircFamily
+import CircNet.CircOnlyArcs
 
 /-!
 # CircNet: the interval window-3 ring
 
-The two theorems of the accompanying paper, on top of the core formalization of
+The theorems of the accompanying paper, on top of the core formalization of
 IIT 4.0 (the `IIT` package, https://github.com/rndmx/Integ, release `v1`):
 
 * `IIT.isComplex_circNet_univ` -- the ring is a complex: it strictly exceeds every
@@ -17,7 +18,12 @@ IIT 4.0 (the `IIT` package, https://github.com/rndmx/Integ, release `v1`):
   against every background (`CircNet/CirculantD3Final.lean`);
 * `IIT.two_pow_sq_le_PhiMax_circNet` -- its integrated information at the all-ones
   state is at least `2 ^ (N ^ 2 / 8) * (1/2) ^ N / (2 * N) - 1`
-  (`CircNet/CircFamily.lean`).
+  (`CircNet/CircFamily.lean`);
+* `IIT.isDistinctionMech_circNet_iff` -- the distinctions of the ring at the all-ones
+  state are exactly its arcs of length at least three, including the whole cycle
+  (`CircNet/CircOnlyArcs.lean`);
+* `IIT.card_distinctionMechs_circNet` -- there are exactly `N * (N - 3) + 1` of them
+  (`CircNet/CircOnlyArcs.lean`).
 
 Nothing in the `IIT` package is duplicated here: this library imports it as a
 versioned dependency and adds only substrate-specific material.

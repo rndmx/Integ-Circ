@@ -2,13 +2,13 @@
 
 A machine-checked proof, in Lean 4, that an explicit family of substrates satisfies
 **every postulate of IIT 4.0 — exclusion included — while its integrated information
-grows super-exponentially**.
+grows as `2` to a power quadratic in the number of units**.
 
 The substrate is as plain as a system can be. Arrange `N` binary units in a circle; at
 each tick every unit looks at itself and its two clockwise neighbours and turns on
 exactly when an odd number of the three are on. Write `R_N` for this ring.
 
-## The two theorems
+## The theorems
 
 For every `N ≥ 8` with `3 ∤ N`:
 
@@ -16,12 +16,14 @@ For every `N ≥ 8` with `3 ∤ N`:
 |---|---|---|
 | `R_N` is a **complex** — it strictly exceeds every nonempty proper subsystem in system integrated information, **in every state and against every background** | `IIT.isComplex_circNet_univ` | `CircNet/CirculantD3Final.lean` |
 | its **integrated information** at the all-ones state is at least `2 ^ (N ^ 2 / 8) * (1/2) ^ N / (2 * N) - 1` | `IIT.two_pow_sq_le_PhiMax_circNet` | `CircNet/CircFamily.lean` |
+| the **distinctions** of `R_N` at the all-ones state are exactly its arcs of length at least three, including the whole cycle | `IIT.isDistinctionMech_circNet_iff` | `CircNet/CircOnlyArcs.lean` |
+| there are exactly `N * (N - 3) + 1` of them | `IIT.card_distinctionMechs_circNet` | `CircNet/CircOnlyArcs.lean` |
 
-Both are checked by the Lean kernel and depend on no axioms beyond the three of the
+All four are checked by the Lean kernel and depend on no axioms beyond the three of the
 ambient logic (`propext`, `Classical.choice`, `Quot.sound`). The development contains no
 use of `native_decide`, and no appeal to numerical evaluation that the kernel does not
-itself perform. The two are checked in a single import closure, so they are established of the
-same object.
+itself perform. All four are checked in a single import closure, so they are established
+of the same object.
 
 ## Relation to the core formalization
 
@@ -52,6 +54,8 @@ Lean modules are `CircNet.*`; the Lean *namespace* is `IIT`, so theorem names re
 import CircNet
 #print axioms IIT.isComplex_circNet_univ
 #print axioms IIT.two_pow_sq_le_PhiMax_circNet
+#print axioms IIT.isDistinctionMech_circNet_iff
+#print axioms IIT.card_distinctionMechs_circNet
 ```
 
 On a machine with limited memory, build with `LEAN_NUM_THREADS=1`; several parallel
@@ -71,6 +75,8 @@ which surfaces as spurious `failed to read file '....olean'` errors.
 * `CircNet/CircSys.lean`, `CircNet/CircMech{Effect,Cause}.lean`,
   `CircNet/CircFamily.lean` — the mechanism level: that the contiguous arcs of length at
   least three are distinctions, and the resulting lower bound on `Φ`.
+* `CircNet/CircOnlyArcs.lean` — the converse: no other mechanism is a distinction, so the
+  distinctions at the all-ones state are exactly those arcs, `N * (N - 3) + 1` of them.
 
 ## Licence
 
