@@ -26,13 +26,6 @@ Nothing from that package is duplicated here. A reader wishing to audit the
 correspondence between IIT 4.0 as published and as formalized should read it there; what
 is added here is substrate-specific.
 
-## Building
-
-```sh
-lake update      # fetches Integ v1 and Mathlib
-lake build
-```
-
 ## Licence
 
 MIT.
