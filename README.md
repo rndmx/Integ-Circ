@@ -8,6 +8,9 @@ The substrate is as plain as a system can be. Arrange `N` binary units in a circ
 each tick every unit looks at itself and its two clockwise neighbours and turns on
 exactly when an odd number of the three are on. Write `R_N` for this ring.
 
+The main theorem, the lower bound on `Φ`, is `IIT.two_pow_sq_le_PhiMax_circNet` in
+`CircNet/CircFamily.lean`.
+
 ## The theorems
 
 For every `N ≥ 8` with `3 ∤ N`:
@@ -16,13 +19,12 @@ For every `N ≥ 8` with `3 ∤ N`:
 |---|---|---|
 | `R_N` is a **complex** — it strictly exceeds every nonempty proper subsystem in system integrated information, **in every state and against every background** | `IIT.isComplex_circNet_univ` | `CircNet/CirculantD3Final.lean` |
 | its **integrated information** at the all-ones state is at least `2 ^ (N ^ 2 / 8) * (1/2) ^ N / (2 * N) - 1` | `IIT.two_pow_sq_le_PhiMax_circNet` | `CircNet/CircFamily.lean` |
-| the **distinctions** of `R_N` at the all-ones state are exactly its arcs of length at least three, including the whole cycle | `IIT.isDistinctionMech_circNet_iff` | `CircNet/CircOnlyArcs.lean` |
-| there are exactly `N * (N - 3) + 1` of them | `IIT.card_distinctionMechs_circNet` | `CircNet/CircOnlyArcs.lean` |
+| the **distinctions** of `R_N` at the all-ones state are exactly its arcs of length at least three, including the whole cycle — `N * (N - 3) + 1` of them | `IIT.isDistinctionMech_circNet_iff`, `IIT.card_distinctionMechs_circNet` | `CircNet/CircOnlyArcs.lean` |
 
-All four are checked by the Lean kernel and depend on no axioms beyond the three of the
+All are checked by the Lean kernel and depend on no axioms beyond the three of the
 ambient logic (`propext`, `Classical.choice`, `Quot.sound`). The development contains no
 use of `native_decide`, and no appeal to numerical evaluation that the kernel does not
-itself perform. All four are checked in a single import closure, so they are established
+itself perform. All are checked in a single import closure, so they are established
 of the same object.
 
 ## Relation to the core formalization
