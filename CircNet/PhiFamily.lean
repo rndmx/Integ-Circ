@@ -14,7 +14,7 @@ Given those, each of the `2^|F| - 1 - |F|` subfamilies of size `≥ 2` contribut
 
 This file isolates that argument, so any construction supplying such a family inherits the
 bound.  The point of the abstraction is that `|F|` may grow exponentially in the substrate
-size, in which case `2^|F|` is doubly exponential.
+size, in which case `2^|F|` grows even faster still.
 -/
 import IIT.System
 
@@ -137,8 +137,8 @@ each integrating at least `c > 0` per support unit, forces
   `Φ_max ≥ (2^|F| - 1 - |F|) · c`.
 
 Only `|F|` and `c` enter; the substrate is arbitrary.  When `|F|` grows exponentially in
-the substrate size this is doubly exponential. -/
-theorem doubly_exp_le_PhiMax_of_family (hc : 0 < c) (hp : ∀ D ∈ F, p ∈ D.support)
+the substrate size this bound grows even faster still. -/
+theorem two_pow_sub_le_PhiMax_of_family (hc : 0 < c) (hp : ∀ D ∈ F, p ∈ D.support)
     (hcF : ∀ D ∈ F, c ≤ D.phiPerUnit) (hFD : F ⊆ distinctions T S u s σ) :
     ((2 ^ F.card - 1 - F.card : ℕ) : ℝ) * c ≤ PhiMax T S u s := by
   have h1 := sum_relPhi_ge hc hp hcF hFD

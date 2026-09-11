@@ -8,7 +8,7 @@ import CircNet.CircMechCause
 import CircNet.PhiFamily
 
 /-!
-# The interval circulant: the arc family and the doubly exponential bound
+# The interval circulant: the arc family and the quadratic-exponent bound
 
 The assembly, with the **contiguous arcs** in place of
 the puncture mechanisms.  For `8 ≤ N` with `3 ∤ N`, every arc
@@ -35,12 +35,12 @@ all-ones can be swapped into any maximizing cause purview
 The arcs containing the unit `0` are parameterized by a pair `(s, e)` -- the arc
 `[-s, e]` -- and the parameter rectangle `1 ≤ s < N/2`, `1 ≤ e < N - N/2` has
 `(N/2 - 1)(N - N/2 - 1) ≥ N²/8` points (`nat_sq_div_eight_le`).  Feeding the resulting
-family to `doubly_exp_le_PhiMax_of_family` gives
+family to `two_pow_sub_le_PhiMax_of_family` gives
 
   `Φ_max ≥ (2^{|F|} - 1 - |F|) · (1/2)^N / (2N)`  (`card_family_le_PhiMax_circNet`),
 
 displayed as `Φ_max ≥ 2^{N²/8} · (1/2)^N / (2N) - 1` (`two_pow_sq_le_PhiMax_circNet`):
-doubly exponential in `N` -- indeed `2^{Θ(N²)}` -- on a substrate that is already known to
+`2^{Θ(N²)}` in `N`, on a substrate that is already known to
 be a complex (`isComplex_circNet_univ`, `CircNet/CirculantD3Final.lean`).
 
 The constants are chosen for directness rather than sharpness: the per-unit floor proved
@@ -719,7 +719,7 @@ variable [NeZero N]
 
 /-- **`Φ_max ≥ (2^{|F|} - 1 - |F|) · (1/2)^N / (2 N)`** for the interval circulant at
 all-ones, `8 ≤ N`, `3 ∤ N`, any background: the arc family fed to
-`doubly_exp_le_PhiMax_of_family`. -/
+`two_pow_sub_le_PhiMax_of_family`. -/
 theorem card_family_le_PhiMax_circNet (hN : 8 ≤ N) (h3 : ¬ (3 ∣ N)) (u : State N)
     (σ : Selector (circNet N) Finset.univ u allOnes) :
     ((2 ^ (circArcFamily hN h3 u σ).card - 1 - (circArcFamily hN h3 u σ).card : ℕ) : ℝ)
@@ -727,12 +727,12 @@ theorem card_family_le_PhiMax_circNet (hN : 8 ≤ N) (h3 : ¬ (3 ∣ N)) (u : St
       ≤ PhiMax (circNet N) Finset.univ u allOnes := by
   have hNr : (8 : ℝ) ≤ N := by exact_mod_cast hN
   have hc : (0 : ℝ) < (1 / 2 : ℝ) ^ N / (2 * N) := div_pos (by positivity) (by linarith)
-  exact doubly_exp_le_PhiMax_of_family hc (mem_circArcFamily_shared hN h3 u σ)
+  exact two_pow_sub_le_PhiMax_of_family hc (mem_circArcFamily_shared hN h3 u σ)
     (mem_circArcFamily_floor hN h3 u σ) (circArcFamily_subset_distinctions hN h3 u σ)
 
 /-- **`Φ_max ≥ 2^{N²/8} · (1/2)^N / (2 N) - 1`**: the bound of
 `card_family_le_PhiMax_circNet` with the quadratic floor on the family size inserted and
-the second-order terms absorbed into the `- 1`.  Doubly exponential in `N`. -/
+the second-order terms absorbed into the `- 1`.  `2^{Θ(N²)}` in `N`. -/
 theorem two_pow_sq_le_PhiMax_circNet (h3 : ¬ (3 ∣ N)) (hN : 8 ≤ N) (u : State N) :
     (2 : ℝ) ^ (N ^ 2 / 8) * ((1 / 2 : ℝ) ^ N / (2 * N)) - 1
       ≤ PhiMax (circNet N) Finset.univ u allOnes := by
