@@ -33,22 +33,6 @@ lake update      # fetches Integ v1 and Mathlib
 lake build
 ```
 
-## Layout
-
-* `CircNet/Common.lean` — the handful of substrate-independent definitions and lemmas
-  used below (the all-ones state, the partition severing one unit from its purview, two
-  facts about stated purviews and maximal cause purviews).
-* `CircNet/Explore.lean`, `CircNet/MinDep.lean`, `CircNet/PhiFamily.lean` — general
-  support: XOR substrates, minimal dependence, and the family bound that converts many
-  distinctions sharing a unit into a lower bound on `Φ`.
-* `CircNet/Circulant*.lean` — the system level: the damage model, the classification of
-  partitions by damage, the competitor bound, and exclusion.
-* `CircNet/CircSys.lean`, `CircNet/CircMech{Effect,Cause}.lean`,
-  `CircNet/CircFamily.lean` — the mechanism level: that the contiguous arcs of length at
-  least three are distinctions, and the resulting lower bound on `Φ`.
-* `CircNet/CircOnlyArcs.lean` — the converse: no other mechanism is a distinction, so the
-  distinctions at the all-ones state are exactly those arcs, `N * (N - 3) + 1` of them.
-
 ## Licence
 
 MIT.
